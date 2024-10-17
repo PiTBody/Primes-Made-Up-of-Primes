@@ -38,11 +38,11 @@ public class LongPoweredPrimes {
 
     public void writePrimesToFile(int exponent) throws IOException {
         synchronized (actualPrimes) {
-            List<BigInteger> sortedActualPrimes = actualPrimes.stream().sorted().collect(Collectors.toList());
+            List<BigInteger> sortedActualPrimes = actualPrimes.stream().sorted().toList();
             writeToFile(sortedActualPrimes, "actualPrimes_exponent_" + exponent + ".txt");
         }
         synchronized (secondPrimes) {
-            List<BigInteger> sortedSecondPrimes = secondPrimes.stream().sorted().collect(Collectors.toList());
+            List<BigInteger> sortedSecondPrimes = secondPrimes.stream().sorted().toList();
             writeToFile(sortedSecondPrimes, "secondPrimes_exponent_" + exponent + ".txt");
         }
     }
