@@ -32,7 +32,7 @@ public class Main {
         int cores = sc.nextInt();
         System.out.println("What exponent of primes do you want to check?");
         int exponent = sc.nextInt();
-        while (exponent >= 0 && exponent <= 1024) {
+        while (exponent >= 0) {
             LongPoweredPrimesBFile longPoweredPrimeBFile = new LongPoweredPrimesBFile();
             Thread[] threads = new Thread[cores];
             for (int i = 0; i < cores; i++) {
@@ -53,13 +53,8 @@ public class Main {
                 e.printStackTrace();
             }
             System.out.println("Finished all threads for exponent " + exponent);
-            if (exponent == 0) {
-                System.out.println("What exponent of primes do you want to check?");
-                exponent = sc.nextInt();
-            }
-            else {
-                exponent *= 2;
-            }
+            System.out.println("What exponent of primes do you want to check?");
+            exponent = sc.nextInt();
         }
         sc.close();
     }
