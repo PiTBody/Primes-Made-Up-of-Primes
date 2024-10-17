@@ -7,19 +7,19 @@ public class Main {
         private int exponent;
         private int start;
         private int cores;
-        private LongPoweredPrimes longPoweredPrime;
+        private LongPoweredPrimesBFile longPoweredPrimeBFile;
 
-        public FastPrimeFinder(int exponent, int start, int cores, LongPoweredPrimes longPoweredPrime) {
+        public FastPrimeFinder(int exponent, int start, int cores, LongPoweredPrimesBFile longPoweredPrimeBFile) {
             this.exponent = exponent;
             this.start = start;
             this.cores = cores;
-            this.longPoweredPrime = longPoweredPrime;
+            this.longPoweredPrimeBFile = longPoweredPrimeBFile;
         }
 
         @Override
         public void run() {
             try {
-                longPoweredPrime.LongPoweredPrimesNumbers(exponent, new BigInteger("" + start), cores);
+                longPoweredPrimeBFile.LongPoweredPrimesNumbersBFile(exponent, new BigInteger("" + start), cores);
             } catch (Exception e) {
                 System.out.println("Exception in thread: " + e.getMessage());
             }
@@ -33,11 +33,11 @@ public class Main {
         System.out.println("What exponent of primes do you want to check?");
         int exponent = sc.nextInt();
         while (exponent >= 0 && exponent <= 1024) {
-            LongPoweredPrimes longPoweredPrime = new LongPoweredPrimes();
+            LongPoweredPrimesBFile longPoweredPrimeBFile = new LongPoweredPrimesBFile();
             Thread[] threads = new Thread[cores];
             for (int i = 0; i < cores; i++) {
                 int start = 3 + 2 * i;
-                threads[i] = new FastPrimeFinder(exponent, start, cores, longPoweredPrime);
+                threads[i] = new FastPrimeFinder(exponent, start, cores, longPoweredPrimeBFile);
                 threads[i].start();
             }
             for (int i = 0; i < cores; i++) {
@@ -48,7 +48,7 @@ public class Main {
                 }
             }
             try {
-                longPoweredPrime.writePrimesToFile(exponent);
+                longPoweredPrimeBFile.writePrimesToFile(exponent);
             } catch (IOException e) {
                 e.printStackTrace();
             }
